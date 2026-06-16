@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>タスク管理</title>
+    <style>
+        body { font-family: sans-serif; max-width: 600px; margin: 40px auto; }
+        h1 { color: #333; }
+        li { margin: 8px 0; list-style: none; }
+        .completed { text-decoration: line-through; color: #999; }
+        form { display: inline; }
+        input[type=text] { padding: 6px; width: 250px; }
+        button { padding: 6px 12px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <h1>タスク管理アプリ</h1>
+
+    <!-- 新規登録フォーム -->
+    <form th:action="@{/add}" method="post">
+        <input type="text" name="title" placeholder="新しいタスクを入力" required>
+        <button type="submit">追加</button>
+    </form>
+
+    <hr>
+
+    <!-- タスク一覧 -->
+    <ul>
+        <li th:each="task : ${tasks}">
+            <span th:class="${task.completed} ? 'completed' : ''" th:text="${task.title}"></span>
+
+            <!-- 完了切り替え -->
+            <form th:action="@{/toggle/{id}(id=${task.id})}" method="post">
+                <button type="submit" th:text="${task.completed} ? '取り消す' : '完了'"></button>
+            </form>
+
+            <!-- 削除 -->
+            <form th:action="@{/delete/{id}(id=${task.id})}" method="post">
+                <button type="submit">削除</button>
+            </form>
+        </li>
+    </ul>
+
+</body>
+</html>
