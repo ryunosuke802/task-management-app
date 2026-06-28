@@ -5,7 +5,7 @@ Java（Spring Boot）とSQL（H2 Database）を使用した、シンプルなタ
 
 ## 使用技術
 
-- 言語：Java 17
+- 言語：Java 21
 - フレームワーク：Spring Boot
 - データベース：H2 Database
 - 画面：Thymeleaf（HTML）
